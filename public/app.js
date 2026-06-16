@@ -1,9 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('lead-form');
   const submitBtn = document.getElementById('submit-btn');
-  const formWrapper = document.getElementById('form-wrapper');
-  const successMessage = document.getElementById('success-message');
+  const modal = document.getElementById('success-modal');
+  const modalContent = modal?.querySelector('div');
+  const closeModalBtn = document.getElementById('close-modal-btn');
   const submitLabel = 'Oblicz koszt montażu';
+
+  const openModal = () => {
+    if (!modal || !modalContent) return;
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('opacity-100', 'pointer-events-auto');
+    modalContent.classList.remove('scale-95');
+    modalContent.classList.add('scale-100');
+  };
+
+  const closeModal = () => {
+    if (!modal || !modalContent) return;
+    modal.classList.remove('opacity-100', 'pointer-events-auto');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    modalContent.classList.remove('scale-100');
+    modalContent.classList.add('scale-95');
+  };
+
+  closeModalBtn?.addEventListener('click', closeModal);
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -45,14 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await res.json();
 
       if (data.success) {
-        formWrapper.classList.add('hidden');
-        successMessage.classList.remove('hidden');
-        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        form.reset();
+        openModal();
       } else {
         throw new Error(data.message || 'Błąd wysyłki');
       }
     } catch {
       alert('Nie udało się wysłać formularza. Zadzwoń: +48 500 100 200');
+    } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = submitLabel;
     }
