@@ -3,11 +3,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitBtn = document.getElementById('submit-btn');
   const formWrapper = document.getElementById('form-wrapper');
   const successMessage = document.getElementById('success-message');
+  const submitLabel = 'Oblicz koszt montażu';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const objectType = form.querySelector('input[name="objectType"]:checked');
+    const surface = form.querySelector('input[name="surface"]:checked');
     const rodo = form.querySelector('#rodo');
+
+    if (!objectType) {
+      alert('Wybierz rodzaj obiektu.');
+      return;
+    }
+    if (!surface) {
+      alert('Wybierz powierzchnię.');
+      return;
+    }
     if (!rodo.checked) {
       alert('Zaznacz zgodę na przetwarzanie danych osobowych (RODO).');
       return;
@@ -16,11 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const payload = {
       name: form.name.value.trim(),
       phone: form.phone.value.trim(),
-      city: form.city.value.trim(),
+      objectType: objectType.value,
+      surface: surface.value,
     };
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Wysyłanie…';
+    submitBtn.textContent = 'Obliczanie…';
 
     try {
       const res = await fetch('/api/lead', {
@@ -41,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch {
       alert('Nie udało się wysłać formularza. Zadzwoń: +48 500 100 200');
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Wyślij zapytanie';
+      submitBtn.textContent = submitLabel;
     }
   });
 });

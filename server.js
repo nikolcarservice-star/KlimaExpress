@@ -9,13 +9,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/api/lead', (req, res) => {
-  const { name, phone, city } = req.body;
+  const { name, phone, objectType, surface } = req.body;
 
-  if (!name || !phone || !city) {
+  if (!name || !phone || !objectType || !surface) {
     return res.status(400).json({ success: false, message: 'Uzupełnij wszystkie pola.' });
   }
 
-  console.log('[LEAD]', { name, phone, city, at: new Date().toISOString() });
+  console.log('[LEAD]', { name, phone, objectType, surface, at: new Date().toISOString() });
 
   res.json({ success: true });
 });
