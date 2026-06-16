@@ -4,10 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('success-modal');
   const modalContent = modal?.querySelector('div');
   const closeModalBtn = document.getElementById('close-modal-btn');
+  const ctaBar = document.getElementById('mobile-cta-bar');
   const submitLabel = 'Oblicz koszt montażu';
 
   const openModal = () => {
     if (!modal || !modalContent) return;
+    if (ctaBar) ctaBar.style.display = 'none';
     modal.classList.remove('opacity-0', 'pointer-events-none');
     modal.classList.add('opacity-100', 'pointer-events-auto');
     modalContent.classList.remove('scale-95');
@@ -16,6 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const closeModal = () => {
     if (!modal || !modalContent) return;
+    if (ctaBar) {
+      ctaBar.style.display = 'flex';
+      if (window.scrollY > 300) {
+        ctaBar.classList.remove('translate-y-full');
+        ctaBar.classList.add('translate-y-0');
+      } else {
+        ctaBar.classList.remove('translate-y-0');
+        ctaBar.classList.add('translate-y-full');
+      }
+    }
     modal.classList.remove('opacity-100', 'pointer-events-auto');
     modal.classList.add('opacity-0', 'pointer-events-none');
     modalContent.classList.remove('scale-100');
