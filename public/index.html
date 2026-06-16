@@ -446,6 +446,31 @@
     </a>
   </div>
 
+  <!-- Desktopowy Pływający Widżet Push -->
+  <div id="desktop-push-cta" class="fixed bottom-24 left-6 z-40 max-w-sm bg-white rounded-2xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-slate-100 hidden md:flex flex-col gap-3 transition-all duration-700 transform -translate-x-[120%] opacity-0">
+    <button type="button" id="close-push-btn" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600 transition-colors" aria-label="Zamknij">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <div class="flex items-start gap-3">
+      <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0 border border-blue-100">
+        <svg class="w-5 h-5 text-blue-600 animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+        </svg>
+      </div>
+      <div>
+        <h4 class="font-bold text-slate-900 text-sm">Chcesz poznać dokładny koszt?</h4>
+        <p class="text-slate-500 text-xs mt-0.5 leading-relaxed">
+          Wybierz parametry swojego budynku w naszym inteligentnym kalkulatorze, a wycenę otrzymasz w 15 minut!
+        </p>
+      </div>
+    </div>
+    <a href="#kontakt" id="push-action-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 px-4 rounded-xl text-center transition-all shadow-md shadow-blue-500/10">
+      Uruchom kalkulator wyceny
+    </a>
+  </div>
+
   <script>
     document.querySelectorAll('.cennik-btn').forEach((button) => {
       button.addEventListener('click', (e) => {
@@ -497,6 +522,34 @@
     ctaBar?.querySelector('a[href="#kontakt"]')?.addEventListener('click', (e) => {
       e.preventDefault();
       document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+  <script>
+    const pushCta = document.getElementById('desktop-push-cta');
+    const closePushBtn = document.getElementById('close-push-btn');
+    const pushActionBtn = document.getElementById('push-action-btn');
+
+    const hidePushCta = () => {
+      if (!pushCta) return;
+      pushCta.classList.remove('translate-x-0', 'opacity-100');
+      pushCta.classList.add('-translate-x-[120%]', 'opacity-0');
+      sessionStorage.setItem('push-cta-closed', 'true');
+    };
+
+    setTimeout(() => {
+      if (pushCta && !sessionStorage.getItem('push-cta-closed')) {
+        pushCta.classList.remove('-translate-x-[120%]', 'opacity-0');
+        pushCta.classList.add('translate-x-0', 'opacity-100');
+      }
+    }, 7000);
+
+    closePushBtn?.addEventListener('click', hidePushCta);
+
+    pushActionBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' });
+      hidePushCta();
     });
   </script>
 
