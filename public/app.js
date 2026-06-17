@@ -4,8 +4,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('success-modal');
   const modalContent = modal?.querySelector('div');
   const closeModalBtn = document.getElementById('close-modal-btn');
+  const demoOrderModal = document.getElementById('demo-order-modal');
+  const demoOrderModalContent = demoOrderModal?.querySelector('div');
+  const demoOrderBtn = document.getElementById('demo-order-btn');
+  const closeDemoOrderBtn = document.getElementById('close-demo-order-btn');
   const ctaBar = document.getElementById('mobile-cta-bar');
   const submitLabel = 'Oblicz koszt montażu';
+
+  const openDemoOrderModal = () => {
+    if (!demoOrderModal || !demoOrderModalContent) return;
+    if (ctaBar) ctaBar.style.display = 'none';
+    demoOrderModal.classList.remove('opacity-0', 'pointer-events-none');
+    demoOrderModal.classList.add('opacity-100', 'pointer-events-auto');
+    demoOrderModalContent.classList.remove('scale-95');
+    demoOrderModalContent.classList.add('scale-100');
+  };
+
+  const closeDemoOrderModal = () => {
+    if (!demoOrderModal || !demoOrderModalContent) return;
+    if (ctaBar) {
+      ctaBar.style.display = 'flex';
+      if (window.scrollY > 300) {
+        ctaBar.classList.remove('translate-y-full');
+        ctaBar.classList.add('translate-y-0');
+      } else {
+        ctaBar.classList.remove('translate-y-0');
+        ctaBar.classList.add('translate-y-full');
+      }
+    }
+    demoOrderModal.classList.remove('opacity-100', 'pointer-events-auto');
+    demoOrderModal.classList.add('opacity-0', 'pointer-events-none');
+    demoOrderModalContent.classList.remove('scale-100');
+    demoOrderModalContent.classList.add('scale-95');
+  };
+
+  demoOrderBtn?.addEventListener('click', openDemoOrderModal);
+  closeDemoOrderBtn?.addEventListener('click', closeDemoOrderModal);
+  demoOrderModal?.addEventListener('click', (e) => {
+    if (e.target === demoOrderModal) closeDemoOrderModal();
+  });
 
   const openModal = () => {
     if (!modal || !modalContent) return;

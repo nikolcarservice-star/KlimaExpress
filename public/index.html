@@ -419,9 +419,12 @@
             </div>
           </div>
           <div class="pt-4">
-            <a href="mailto:leadflowone@gmail.com?subject=Zam%C3%B3wienie%20strony%20HVAC%20dla%20mojej%20firmy&amp;body=Dzie%C5%84%20dobry%2C%0A%0AChc%C4%99%20zam%C3%B3wi%C4%87%20t%C4%99%20stron%C4%99%20dla%20mojej%20firmy%20HVAC.%0A%0ANazwa%20firmy%3A%20%0AMiasto%3A%20%0ATelefon%3A%20%0A%0APozdrawiam" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-6 rounded-xl transition-all shadow-lg shadow-blue-500/20">
+            <a href="mailto:leadflowone@gmail.com?subject=Zam%C3%B3wienie%20strony%20HVAC%20dla%20mojej%20firmy&amp;body=Dzie%C5%84%20dobry%2C%0A%0AChc%C4%99%20zam%C3%B3wi%C4%87%20t%C4%99%20stron%C4%99%20dla%20mojej%20firmy%20HVAC.%0A%0ANazwa%20firmy%3A%20%0AMiasto%3A%20%0ATelefon%3A%20%0A%0APozdrawiam" class="inline-flex md:hidden items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-6 rounded-xl transition-all shadow-lg shadow-blue-500/20">
               <span>Chcę zamówić tę stronę dla swojej firmy</span>
             </a>
+            <button type="button" id="demo-order-btn" class="hidden md:inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-6 rounded-xl transition-all shadow-lg shadow-blue-500/20">
+              <span>Chcę zamówić tę stronę dla swojej firmy</span>
+            </button>
           </div>
         </div>
       </section>
@@ -443,6 +446,27 @@
       </p>
       <button type="button" id="close-modal-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-xl transition-colors duration-200 shadow-md shadow-blue-500/10">
         Rozumiem
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal zamówienia strony DEMO (desktop) -->
+  <div id="demo-order-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300" role="dialog" aria-modal="true" aria-labelledby="demo-order-modal-title">
+    <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl transform scale-95 transition-all duration-300">
+      <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-5 border border-blue-100 mx-auto">
+        <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+      </div>
+      <h3 id="demo-order-modal-title" class="text-2xl font-bold text-slate-900 text-center mb-2">Zamów stronę dla swojej firmy</h3>
+      <p class="text-slate-600 text-sm text-center leading-relaxed mb-6">
+        Dostosujemy ten szablon do Twojej marki w&nbsp;24&nbsp;godziny — logo, kolory, cennik i dane kontaktowe. Napisz do nas, a odezwiemy się z wyceną licencji.
+      </p>
+      <a href="mailto:leadflowone@gmail.com?subject=Zam%C3%B3wienie%20strony%20HVAC%20dla%20mojej%20firmy&amp;body=Dzie%C5%84%20dobry%2C%0A%0AChc%C4%99%20zam%C3%B3wi%C4%87%20t%C4%99%20stron%C4%99%20dla%20mojej%20firmy%20HVAC.%0A%0ANazwa%20firmy%3A%20%0AMiasto%3A%20%0ATelefon%3A%20%0A%0APozdrawiam" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors shadow-md shadow-blue-500/10 mb-3">
+        Wyślij e-mail: leadflowone@gmail.com
+      </a>
+      <button type="button" id="close-demo-order-btn" class="w-full border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium py-3 px-6 rounded-xl transition-colors">
+        Zamknij
       </button>
     </div>
   </div>
